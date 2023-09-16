@@ -10,52 +10,44 @@ function Main({ setScore, score }) {
   const [selectedDog, setSelectedDog] = useState("");
 
   useEffect(() => {
-    let array = [];
+    let dogListarr = [];
+    let optionArr = [];
+    let indexarr = [];
+    //create Dog Breed list
     axios.get("https://dog.ceo/api/breeds/list/all").then((response) => {
       // setDogList(response.data.message);
       for (let [key, value] of Object.entries(response.data.message)) {
-        array.push(key);
+        dogListarr.push(key);
       }
+      console.log(dogListarr);
 
-      console.log(array);
-      setDogList(array);
+      setDogList(dogListarr);
+
+      //create option list
+
+      indexarr.push(Math.trunc(Math.random() * 20));
+      indexarr.push(Math.trunc(Math.random() * 20 + 21));
+      indexarr.push(Math.trunc(Math.random() * 20 + 42));
+      indexarr.push(Math.trunc(Math.random() * 20 + 63));
+      // for (let i = 0; i < 4; i++) {
+      //   indexarr.push(Math.trunc(Math.random() * 97));
+      // }
+      for (let elem of indexarr) {
+        optionArr.push(dogListarr[elem]);
+        console.log(optionArr);
+      }
+      let currentSelectedDog = optionArr[Math.trunc(Math.random() * 3)];
+      console.log(currentSelectedDog);
+      setSelectedDog(currentSelectedDog);
+      setDogOptions(optionArr);
+
+      axios
+        .get(`https://dog.ceo/api/breed/${currentSelectedDog}/images/random`)
+        .then((response) => {
+          setRandomDogImage(response.data.message);
+        });
     });
   }, []);
-
-  useEffect(() => {
-    let dogListarr = [];
-    let optionArr = [];
-    //create Dog Breed list
-    for (let [key, value] of Object.entries(dogList)) {
-      dogListarr.push(value);
-    }
-    console.log(dogListarr);
-    dogListarr.pop();
-    //create option list
-    let indexarr = [];
-
-    indexarr.push(Math.trunc(Math.random() * 20));
-    indexarr.push(Math.trunc(Math.random() * 20 + 21));
-    indexarr.push(Math.trunc(Math.random() * 20 + 42));
-    indexarr.push(Math.trunc(Math.random() * 20 + 63));
-    // for (let i = 0; i < 4; i++) {
-    //   indexarr.push(Math.trunc(Math.random() * 97));
-    // }
-    for (let elem of indexarr) {
-      optionArr.push(dogListarr[elem]);
-    }
-    let currentSelectedDog = optionArr[Math.trunc(Math.random() * 3)];
-    console.log(currentSelectedDog);
-    console.log(optionArr);
-    setSelectedDog(currentSelectedDog);
-    setDogOptions(optionArr);
-
-    axios
-      .get(`https://dog.ceo/api/breed/${currentSelectedDog}/images/random`)
-      .then((response) => {
-        setRandomDogImage(response.data.message);
-      });
-  }, [dogList]);
 
   const optionClickHandler = (e) => {
     console.log(e.target.id);
