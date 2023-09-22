@@ -1,0 +1,40 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/global" as *;
+
+.main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100vw;
+  margin: auto;
+  &__left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(209, 209, 209);
+    width: 50%;
+    gap: 10px;
+    &-item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      font-size: 16px;
+      width: 80%;
+      height: 30px;
+      background-color: rgb(83, 83, 83);
+      border-radius: 4px;
+      color: white;
+      &:hover {
+        cursor: pointer;
+        color: gray;
+        background-color: white;
+      }
+    }
+  }
+  &__right {
+    width: 50%;
+  }
+}

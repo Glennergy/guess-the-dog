@@ -1,0 +1,19 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/global" as *;
+
+.header {
+  font-size: 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.6rem 5rem;
+  margin-bottom: 2rem;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5rem;
+  background-color: #3b4241;
+  color: #ffffff;
+  z-index: 999 !important;
+}
